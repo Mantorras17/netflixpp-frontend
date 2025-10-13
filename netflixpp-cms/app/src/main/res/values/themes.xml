@@ -1,5 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NetflixPPCMS" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/netflix_red</item>
+        <item name="colorPrimaryVariant">@color/netflix_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/netflix_red</item>
+        <item name="colorSecondaryVariant">@color/netflix_red</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 
-    <style name="Theme.Netflixppcms" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.NetflixPPCMS" parent="Base.Theme.NetflixPPCMS" />
 </resources>
