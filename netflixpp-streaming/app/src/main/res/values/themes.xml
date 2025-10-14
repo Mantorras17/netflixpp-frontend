@@ -1,5 +1,31 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.NetflixPPStreaming" parent="Theme.Material3.Dark">
+        <item name="colorPrimary">@color/netflix_red</item>
+        <item name="colorPrimaryVariant">@color/netflix_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/netflix_red</item>
+        <item name="colorSecondaryVariant">@color/netflix_red</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/netflix_dark</item>
+    </style>
 
-    <style name="Theme.Netflixppstreaming" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.NetflixPPStreaming" parent="Base.Theme.NetflixPPStreaming" />
+
+    <!-- Splash Screen Theme -->
+    <style name="Theme.NetflixPPStreaming.Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+        <item name="android:statusBarColor">@color/netflix_dark</item>
+        <item name="android:navigationBarColor">@color/netflix_dark</item>
+    </style>
+
+    <!-- Full Screen Theme for Video Player -->
+    <style name="Theme.NetflixPPStreaming.FullScreen" parent="Theme.NetflixPPStreaming">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 </resources>
