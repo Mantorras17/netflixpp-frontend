@@ -14,21 +14,22 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.NetflixPPCMS"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:targetApi="31">
 
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="false"
-            android:theme="@style/Theme.NetflixPPCMS" />
-
-        <activity
-            android:name=".activity.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.NetflixPPCMS">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.MainActivity"
+            android:exported="false" />
 
         <activity
             android:name=".activity.UploadActivity"

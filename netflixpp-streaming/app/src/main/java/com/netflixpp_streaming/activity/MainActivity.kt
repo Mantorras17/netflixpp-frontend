@@ -14,6 +14,7 @@ import com.netflixpp_streaming.api.ApiClient
 import com.netflixpp_streaming.databinding.ActivityMainBinding
 import com.netflixpp_streaming.model.Category
 import com.netflixpp_streaming.model.Movie
+import com.netflixpp_streaming.model.MovieResponse
 import com.netflixpp_streaming.util.Prefs
 import com.netflixpp_streaming.util.MovieUtils
 import com.netflixpp_streaming.util.NetworkUtils
@@ -150,12 +151,13 @@ class MainActivity : AppCompatActivity() {
 
         showLoading()
 
-        ApiClient.getApiService(this).getMovies().enqueue(object : Callback<List<Movie>> {
-            override fun onResponse(call: Call<List<Movie>>, response: Response<List<Movie>>) {
+        ApiClient.getApiService(this).getMovies().enqueue(object : Callback<MovieResponse> {
+            override fun onResponse(call: Call<MovieResponse>, response: Response<MovieResponse>) {
                 hideLoading()
 
                 if (response.isSuccessful) {
-                    val movies = response.body()
+                    val movieResponse = response.body()
+                    val movies = movieResponse?.movies
                     
                     if (movies.isNullOrEmpty()) {
                         showEmptyState()
@@ -173,12 +175,12 @@ class MainActivity : AppCompatActivity() {
                         403 -> showPermissionError()
                         404 -> showNotFoundError()
                         500, 502, 503 -> showServerError()
-                        else -> showGenericError("Error ${response.code()}: ${response.message()}")
+                        else -> showGenericError("Error ${'$'}{response.code()}: ${'$'}{response.message()}")
                     }
                 }
             }
 
-            override fun onFailure(call: Call<List<Movie>>, t: Throwable) {
+            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
                 hideLoading()
                 
                 when (t) {

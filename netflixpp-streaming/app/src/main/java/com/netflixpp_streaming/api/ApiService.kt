@@ -10,7 +10,7 @@ interface ApiService {
     fun login(@Body loginRequest: LoginRequest): Call<LoginResponse>
 
     @GET("movies")
-    fun getMovies(): Call<List<Movie>>
+    fun getMovies(): Call<MovieResponse>
 
     @GET("movies/{id}")
     fun getMovie(@Path("id") id: String): Call<Movie>
