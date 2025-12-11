@@ -51,31 +51,37 @@
             android:orientation="horizontal"
             android:layout_marginTop="12dp">
 
-            <TextView
-                android:id="@+id/btnDelete"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:background="@drawable/bg_button"
-                android:textColor="@color/white"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-
-            <Space
+            <Button
+                android:id="@+id/btnEdit"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/tvCreatedAt"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Created: Today"
-                android:textColor="@color/gray"
+                android:layout_weight="1"
+                android:text="Edit"
+                android:textColor="@color/white"
                 android:textSize="10sp"
-                android:layout_gravity="center_vertical" />
+                android:backgroundTint="@color/dark_gray"
+                android:layout_marginEnd="4dp"/>
+
+            <Button
+                android:id="@+id/btnResetPassword"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reset Pass"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:backgroundTint="@color/dark_gray"
+                android:layout_marginEnd="4dp"/>
+
+            <Button
+                android:id="@+id/btnDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"
+                android:textColor="@color/white"
+                android:textSize="10sp"
+                android:backgroundTint="@color/red"/>
 
         </LinearLayout>
 

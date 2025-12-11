@@ -2,11 +2,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +21,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/Theme.NetflixPPStreaming"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
         <!-- Splash Screen -->
@@ -31,30 +38,71 @@
         <!-- Login Activity -->
         <activity
             android:name=".activity.LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
 
         <!-- Main Browse Activity -->
         <activity
             android:name=".activity.MainActivity"
-            android:exported="false" />
-
-        <!-- Video Player Activity -->
-        <activity
-            android:name=".activity.VideoPlayerActivity"
             android:exported="false"
-            android:configChanges="orientation|screenSize"
-            android:screenOrientation="landscape" />
+            android:theme="@style/Theme.NetflixPPStreaming" />
+
+        <!-- Movie Detail Activity -->
+        <activity
+            android:name=".activity.MovieDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
+
+        <!-- Movie Player Activity -->
+        <activity
+            android:name=".activity.MoviePlayerActivity"
+            android:exported="false"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.NetflixPPStreaming.Fullscreen" />
+
+        <!-- Search Activity -->
+        <activity
+            android:name=".activity.SearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
+
+        <!-- Profile Activity -->
+        <activity
+            android:name=".activity.ProfileActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
 
         <!-- Mesh Network Activity -->
         <activity
             android:name=".activity.MeshActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
+
+        <!-- Downloads Activity -->
+        <activity
+            android:name=".activity.DownloadsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
+
+        <!-- My List Activity (if you have it) -->
+        <activity
+            android:name=".activity.MyListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetflixPPStreaming" />
+
+        <!-- Download Service -->
+        <service
+            android:name=".service.DownloadService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="dataSync" />
 
         <!-- P2P Transfer Service -->
         <service
             android:name=".service.P2PTransferService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false" />
 
     </application>
 

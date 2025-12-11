@@ -1,4 +1,4 @@
-package com.netflixppstreaming.activity
+package com.netflixpp_streaming.activity
 
 import android.content.Intent
 import android.os.Bundle

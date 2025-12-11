@@ -8,24 +8,32 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.netflixpp_streaming.R
 import com.netflixpp_streaming.model.Category
-import com.netflixpp_streaming.model.Video
+import com.netflixpp_streaming.model.Movie
 
 class CategoryAdapter(
     private val categories: List<Category>,
-    private val onVideoClick: (Video) -> Unit
+    private val onMovieClick: (Movie, View) -> Unit  // Pass the view for transition
 ) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tvCategoryTitle: TextView = itemView.findViewById(R.id.tvCategoryTitle)
-        private val rvVideos: RecyclerView = itemView.findViewById(R.id.rvVideos)
+        private val rvMovies: RecyclerView = itemView.findViewById(R.id.rvMovies)
 
         fun bind(category: Category) {
             tvCategoryTitle.text = category.title
 
-            val videoAdapter = VideoAdapter(category.videos, onVideoClick)
-            rvVideos.apply {
-                layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
-                adapter = videoAdapter
+            // Pass the thumbnail view to parent for transition
+            val movieAdapter = MovieAdapter(category.movies) { movie, thumbnailView ->
+                onMovieClick(movie, thumbnailView)
+            }
+            
+            rvMovies.apply {
+                layoutManager = LinearLayoutManager(
+                    itemView.context, 
+                    LinearLayoutManager.HORIZONTAL, 
+                    false
+                )
+                adapter = movieAdapter
             }
         }
     }

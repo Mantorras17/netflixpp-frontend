@@ -35,11 +35,35 @@
             android:exported="false" />
 
         <activity
-            android:name=".activity.VideoListActivity"
+            android:name=".activity.MovieListActivity"
             android:exported="false" />
 
         <activity
             android:name=".activity.UserManagementActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.DashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.EditMovieActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.MovieDetailActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.EditUserActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.LogsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".activity.StorageActivity"
             android:exported="false" />
 
     </application>

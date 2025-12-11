@@ -29,7 +29,7 @@ class P2PTransferService : Service() {
     }
 
     private var isSharing = false
-    private val sharedChunks = mutableMapOf<String, List<ByteArray>>() // videoId to chunks
+    private val sharedChunks = mutableMapOf<String, List<ByteArray>>() // movieoId to chunks
 
     override fun onBind(intent: Intent?): IBinder? = null
 
@@ -48,8 +48,8 @@ class P2PTransferService : Service() {
         Log.d(TAG, "Starting P2P sharing service")
 
         // In a real implementation, this would:
-        // 1. Scan for available videos to share
-        // 2. Pre-process videos into chunks
+        // 1. Scan for available movies to share
+        // 2. Pre-process movies into chunks
         // 3. Announce availability to mesh network
         // 4. Handle incoming chunk requests
 
@@ -67,13 +67,13 @@ class P2PTransferService : Service() {
     private fun simulateSharing() {
         Thread {
             try {
-                // Simulate preparing videos for sharing
-                Log.d(TAG, "Preparing videos for sharing...")
+                // Simulate preparing movies for sharing
+                Log.d(TAG, "Preparing movies for sharing...")
                 Thread.sleep(2000)
 
                 // Simulate ongoing sharing
                 while (isSharing) {
-                    Log.d(TAG, "Sharing videos via P2P...")
+                    Log.d(TAG, "Sharing movies via P2P...")
                     Thread.sleep(5000)
                 }
             } catch (e: InterruptedException) {

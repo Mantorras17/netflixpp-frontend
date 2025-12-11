@@ -2,6 +2,8 @@ package com.netflixpp_streaming.service
 
 import android.content.Context
 import android.util.Log
+import com.netflixpp_streaming.model.MeshNode
+import com.netflixpp_streaming.model.MeshTransfer
 import io.netty.bootstrap.Bootstrap
 import io.netty.bootstrap.ServerBootstrap
 import io.netty.channel.*
@@ -21,7 +23,11 @@ object MeshProtocol {
     private var clientGroup: NioEventLoopGroup? = null
     private var serverChannel: Channel? = null
     private val connectedPeers = mutableListOf<Channel>()
-    private val availableVideos = mutableMapOf<String, String>() // videoId to chunk data
+    private val availableMovies = mutableMapOf<String, String>() // movieId to chunk data
+
+    const val ACTION_PEER_DISCOVERED = "com.netflixpp_streaming.PEER_DISCOVERED"
+    const val ACTION_PEER_DISCONNECTED = "com.netflixpp_streaming.PEER_DISCONNECTED"
+    const val ACTION_TRANSFER_UPDATE = "com.netflixpp_streaming.TRANSFER_UPDATE"
 
     fun startMeshNode(context: Context) {
         Log.d(TAG, "Starting mesh node...")
@@ -64,7 +70,7 @@ object MeshProtocol {
         clientGroup?.shutdownGracefully()
 
         connectedPeers.clear()
-        availableVideos.clear()
+        availableMovies.clear()
 
         serverChannel = null
         serverGroup = null
@@ -75,18 +81,56 @@ object MeshProtocol {
         return serverChannel != null && serverChannel!!.isActive
     }
 
-    fun getMeshVideoUrl(videoId: String): String? {
+    fun getMeshMovieUrl(movieId: String): String? {
         // In a real implementation, this would return a mesh URL
         // For now, return null to indicate mesh source not available
-        return if (availableVideos.containsKey(videoId)) {
-            "mesh://$videoId"
+        return if (availableMovies.containsKey(movieId)) {
+            "mesh://$movieId"
         } else {
             null
         }
     }
 
-    fun isVideoAvailableInMesh(videoId: String): Boolean {
-        return availableVideos.containsKey(videoId)
+    fun isMovieAvailableInMesh(movieId: String): Boolean {
+        return availableMovies.containsKey(movieId)
+    }
+
+    fun getAvailablePeersForMovie(movieId: String): Int {
+        // Return number of peers that have this movie
+        return 0 // Implement based on your mesh logic
+    }
+
+    fun getMeshStats(): MeshStats {
+        // Return real stats in production
+        return MeshStats(
+            totalPeers = connectedPeers.size,
+            activePeers = connectedPeers.count { it.isActive },
+            totalDataShared = 0L,
+            totalDataReceived = 0L,
+            currentSpeed = 0L,
+            averageLatency = 50,
+            uptime = 0L
+        )
+    }
+
+    fun getActiveTransfers(): List<MeshTransfer> {
+        // Return active transfers
+        return emptyList()
+    }
+
+    fun discoverPeers(callback: (List<MeshNode>) -> Unit) {
+        // Simulate peer discovery
+        // In production, implement actual peer discovery protocol
+        callback(emptyList())
+    }
+
+    fun connectToPeer(ipAddress: String, port: Int, callback: (Boolean) -> Unit) {
+        // Implement peer connection
+        callback(true)
+    }
+
+    fun disconnectFromPeer(nodeId: String) {
+        // Implement peer disconnection
     }
 
     private fun startPeerDiscovery() {
@@ -97,16 +141,16 @@ object MeshProtocol {
             try {
                 // Simulate finding some peers
                 Thread.sleep(1000)
-                connectToPeer("192.168.1.101")
+                connectToPeerInternal("192.168.1.101")
                 Thread.sleep(2000)
-                connectToPeer("192.168.1.102")
+                connectToPeerInternal("192.168.1.102")
             } catch (e: InterruptedException) {
                 Thread.currentThread().interrupt()
             }
         }.start()
     }
 
-    private fun connectToPeer(ip: String) {
+    private fun connectToPeerInternal(ip: String) {
         try {
             val bootstrap = Bootstrap()
             bootstrap.group(clientGroup)
@@ -130,6 +174,38 @@ object MeshProtocol {
         } catch (e: Exception) {
             Log.e(TAG, "Failed to connect to peer: $ip", e)
         }
+    }
+
+    private fun handleMessage(ctx: ChannelHandlerContext, message: String) {
+        when {
+            message.startsWith("HELLO") -> {
+                // Peer handshake
+                val parts = message.split("|")
+                if (parts.size > 1) {
+                    Log.d(TAG, "Peer connected: ${parts[1]}")
+                }
+                ctx.writeAndFlush("WELCOME|${android.os.Build.MODEL}\n")
+            }
+            message.startsWith("REQUEST_CHUNK") -> {
+                // Handle chunk request
+                val parts = message.split("|")
+                if (parts.size >= 3) {
+                    val movieId = parts[1]
+                    val chunkIndex = parts[2].toInt()
+                    sendChunk(ctx, movieId, chunkIndex)
+                }
+            }
+            message.startsWith("CHUNK_DATA") -> {
+                // Handle received chunk data
+                Log.d(TAG, "Received chunk data")
+            }
+        }
+    }
+
+    private fun sendChunk(ctx: ChannelHandlerContext, movieId: String, chunkIndex: Int) {
+        // Simulate sending chunk data
+        val chunkData = "CHUNK_DATA|$movieId|$chunkIndex|${"X".repeat(1024)}" // 1KB dummy data
+        ctx.writeAndFlush("$chunkData\n")
     }
 
     class MeshServerHandler : SimpleChannelInboundHandler<String>() {
@@ -156,35 +232,13 @@ object MeshProtocol {
         }
     }
 
-    private fun handleMessage(ctx: ChannelHandlerContext, message: String) {
-        when {
-            message.startsWith("HELLO") -> {
-                // Peer handshake
-                val parts = message.split("|")
-                if (parts.size > 1) {
-                    Log.d(TAG, "Peer connected: ${parts[1]}")
-                }
-                ctx.writeAndFlush("WELCOME|${android.os.Build.MODEL}\n")
-            }
-            message.startsWith("REQUEST_CHUNK") -> {
-                // Handle chunk request
-                val parts = message.split("|")
-                if (parts.size >= 3) {
-                    val videoId = parts[1]
-                    val chunkIndex = parts[2].toInt()
-                    sendChunk(ctx, videoId, chunkIndex)
-                }
-            }
-            message.startsWith("CHUNK_DATA") -> {
-                // Handle received chunk data
-                Log.d(TAG, "Received chunk data")
-            }
-        }
-    }
-
-    private fun sendChunk(ctx: ChannelHandlerContext, videoId: String, chunkIndex: Int) {
-        // Simulate sending chunk data
-        val chunkData = "CHUNK_DATA|$videoId|$chunkIndex|${"X".repeat(1024)}" // 1KB dummy data
-        ctx.writeAndFlush("$chunkData\n")
-    }
+    data class MeshStats(
+        val totalPeers: Int,
+        val activePeers: Int,
+        val totalDataShared: Long,
+        val totalDataReceived: Long,
+        val currentSpeed: Long,
+        val averageLatency: Int,
+        val uptime: Long
+    )
 }

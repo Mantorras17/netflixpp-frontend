@@ -1,19 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Netflix Brand Colors -->
     <color name="netflix_red">#FFE50914</color>
+    <color name="netflix_red_dark">#FFB20710</color>
+    <color name="netflix_red_light">#FFFF0A16</color>
+    
+    <!-- Background Colors -->
     <color name="netflix_dark">#FF141414</color>
     <color name="netflix_dark_gray">#FF2D2D2D</color>
     <color name="netflix_light_gray">#FF424242</color>
-    <color name="netflix_text_gray">#FFB3B3B3</color>
-
-    <!-- Bottom Navigation Colors -->
+    <color name="netflix_lighter_gray">#FF5A5A5A</color>
+    
+    <!-- Text Colors -->
+    <color name="netflix_text_primary">#FFFFFFFF</color>
+    <color name="netflix_text_secondary">#FFB3B3B3</color>
+    <color name="netflix_text_gray">#FF8C8C8C</color>
+    <color name="netflix_text_disabled">#FF666666</color>
+    
+    <!-- Navigation Colors -->
     <color name="bottom_nav_color">#FFFFFFFF</color>
     <color name="bottom_nav_selected">#FFE50914</color>
-
+    <color name="bottom_nav_background">#FF1F1F1F</color>
+    
     <!-- Gradient Colors -->
-    <color name="gradient_start">#80000000</color>
+    <color name="gradient_start">#FF000000</color>
+    <color name="gradient_middle">#80000000</color>
     <color name="gradient_end">#00000000</color>
     <color name="black_transparent">#80000000</color>
+    <color name="black_semi_transparent">#CC000000</color>
+    <color name="black_light_transparent">#40000000</color>
+    
+    <!-- Accent Colors -->
+    <color name="success_green">#FF00C853</color>
+    <color name="warning_yellow">#FFFFAB00</color>
+    <color name="error_red">#FFFF1744</color>
+    <color name="info_blue">#FF2979FF</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_dark">#DD000000</color>
+    <color name="overlay_medium">#99000000</color>
+    <color name="overlay_light">#55000000</color>
+    
+    <!-- Rating Colors -->
+    <color name="rating_gold">#FFFFD700</color>
+    <color name="rating_star">#FFFFAB00</color>
+    
+    <!-- Mesh Network Colors -->
+    <color name="mesh_active">#FF00E676</color>
+    <color name="mesh_inactive">#FF8C8C8C</color>
+    <color name="mesh_warning">#FFFFAB00</color>
+    <color name="mesh_primary">#4CAF50</color>
+    <color name="mesh_secondary">#81C784</color>
+    <color name="mesh_dark">#388E3C</color>
+    <color name="mesh_light">#C8E6C9</color>
+    
+    <!-- Card Backgrounds -->
+    <color name="card_background">#FF1F1F1F</color>
+    <color name="card_elevated">#FF2D2D2D</color>
+    <color name="card_hover">#FF353535</color>
+    
+    <!-- Alias colors for consistency -->
+    <color name="background">@color/netflix_dark</color>
+    <color name="surface">@color/netflix_dark_gray</color>
+    <color name="text_primary">@color/netflix_text_primary</color>
+    <color name="text_secondary">@color/netflix_text_secondary</color>
+    <color name="success">@color/success_green</color>
+    <color name="warning">@color/warning_yellow</color>
+    <color name="error">@color/error_red</color>
+
+    <!-- Quality indicator colors -->
+    <color name="quality_excellent">#FF00C853</color>
+    <color name="quality_good">#FF64DD17</color>
+    <color name="quality_fair">#FFFFAB00</color>
+    <color name="quality_poor">#FFFF1744</color>
 </resources>

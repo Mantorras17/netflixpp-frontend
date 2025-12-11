@@ -1,39 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="32dp"
-    android:gravity="center"
-    android:background="@color/netflix_dark">
+    android:background="@drawable/bg_login_gradient"
+    android:padding="24dp">
 
+    <!-- Logo -->
     <ImageView
+        android:id="@+id/ivLogo"
         android:layout_width="120dp"
         android:layout_height="120dp"
         android:src="@drawable/ic_netflix_streaming"
-        android:layout_marginBottom="40dp"
-        app:tint="@color/netflix_red" />
+        android:layout_marginBottom="24dp"
+        app:tint="@color/netflix_red"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvAppName"
+        app:layout_constraintVertical_chainStyle="packed" />
 
+    <!-- App Name -->
     <TextView
+        android:id="@+id/tvAppName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Netflix++ Streaming"
+        android:text="NETFLIX++ STREAMING"
         android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginBottom="40dp" />
+        android:fontFamily="sans-serif-black"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tvTagline" />
 
+    <!-- Tagline -->
+    <TextView
+        android:id="@+id/tvTagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stream from anywhere, anytime"
+        android:textColor="@color/netflix_text_gray"
+        android:textSize="14sp"
+        android:layout_marginBottom="40dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvAppName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tilUsername" />
+
+    <!-- Username Input -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:id="@+id/tilUsername"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        app:boxBackgroundColor="@color/netflix_light_gray"
+        app:boxBackgroundMode="filled"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white">
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxStrokeColor="@color/netflix_red"
+        app:hintTextColor="@color/netflix_red"
+        app:startIconDrawable="@drawable/ic_person"
+        app:startIconTint="@color/netflix_text_gray"
+        app:layout_constraintTop_toBottomOf="@+id/tvTagline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tilPassword">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etUsername"
@@ -41,20 +79,36 @@
             android:layout_height="wrap_content"
             android:hint="Username"
             android:textColor="@color/white"
-            android:textColorHint="@color/netflix_text_gray" />
+            android:textColorHint="@color/netflix_text_gray"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Password Input -->
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
+        android:id="@+id/tilPassword"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
+        app:boxBackgroundColor="@color/netflix_light_gray"
+        app:boxBackgroundMode="filled"
         app:boxCornerRadiusBottomEnd="8dp"
         app:boxCornerRadiusBottomStart="8dp"
         app:boxCornerRadiusTopEnd="8dp"
         app:boxCornerRadiusTopStart="8dp"
-        app:boxStrokeColor="@color/white"
-        app:hintTextColor="@color/white">
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="2dp"
+        app:boxStrokeColor="@color/netflix_red"
+        app:hintTextColor="@color/netflix_red"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:startIconTint="@color/netflix_text_gray"
+        app:endIconMode="password_toggle"
+        app:endIconTint="@color/netflix_text_gray"
+        app:layout_constraintTop_toBottomOf="@+id/tilUsername"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
@@ -63,25 +117,38 @@
             android:hint="Password"
             android:inputType="textPassword"
             android:textColor="@color/white"
-            android:textColorHint="@color/netflix_text_gray" />
+            android:textColorHint="@color/netflix_text_gray"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <!-- Login Button -->
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:text="Sign In"
         android:textColor="@color/white"
-        android:backgroundTint="@color/netflix_red"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:backgroundTint="@color/netflix_red"
+        app:cornerRadius="8dp"
+        app:elevation="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/tilPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
+    <!-- Loading Progress -->
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:visibility="gone" />
+        android:indeterminateTint="@color/netflix_red"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,8 +37,8 @@ object Prefs {
         }
     }
 
-    fun saveMyList(context: Context, videoIds: List<String>) {
-        val myListJson = Gson().toJson(videoIds)
+    fun saveMyList(context: Context, movieIds: List<String>) {
+        val myListJson = Gson().toJson(movieIds)
         getSharedPreferences(context).edit().putString(KEY_MY_LIST, myListJson).apply()
     }
 
@@ -53,5 +53,29 @@ object Prefs {
 
     fun clearUserData(context: Context) {
         getSharedPreferences(context).edit().clear().apply()
+    }
+
+    fun incrementDataStreamed(context: Context, bytes: Long) {
+        val prefs = getSharedPreferences(context)
+        val current = prefs.getLong("data_streamed", 0)
+        prefs.edit().putLong("data_streamed", current + bytes).apply()
+    }
+
+    fun incrementDataShared(context: Context, bytes: Long) {
+        val prefs = getSharedPreferences(context)
+        val current = prefs.getLong("data_shared", 0)
+        prefs.edit().putLong("data_shared", current + bytes).apply()
+    }
+
+    fun getMovieQualityPreference(context: Context): String {
+        return getSharedPreferences(context).getString("pref_movie_quality", "auto") ?: "auto"
+    }
+
+    fun isAutoMeshEnabled(context: Context): Boolean {
+        return getSharedPreferences(context).getBoolean("pref_auto_mesh", true)
+    }
+
+    fun getMaxMeshConnections(context: Context): Int {
+        return getSharedPreferences(context).getInt("pref_max_connections", 5)
     }
 }

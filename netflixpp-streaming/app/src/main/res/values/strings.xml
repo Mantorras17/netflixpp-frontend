@@ -1,29 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- App Name -->
     <string name="app_name">Netflix++ Streaming</string>
+    <string name="app_tagline">Stream from anywhere, anytime</string>
+    
+    <!-- Authentication -->
     <string name="welcome">Welcome to Netflix++</string>
-    <string name="login">Login</string>
+    <string name="login">Sign In</string>
+    <string name="logout">Logout</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="remember_me">Remember Me</string>
+    
+    <!-- Navigation -->
     <string name="browse">Browse</string>
+    <string name="home">Home</string>
     <string name="my_list">My List</string>
-    <string name="mesh_network">Mesh Network</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="back">Back</string>
+    
+    <!-- Movie Actions -->
     <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="stop">Stop</string>
+    <string name="resume">Resume</string>
     <string name="my_list_add">Add to My List</string>
     <string name="my_list_remove">Remove from My List</string>
-    <string name="loading">Loading...</string>
-    <string name="error_loading_videos">Error loading videos</string>
-    <string name="no_videos">No videos available</string>
+    <string name="share">Share</string>
+    <string name="more_info">More Info</string>
+    <string name="trailer">Watch Trailer</string>
+    
+    <!-- Quality -->
+    <string name="quality">Quality</string>
+    <string name="quality_auto">Auto</string>
+    <string name="quality_high">High (1080p)</string>
+    <string name="quality_medium">Standard (360p)</string>
+    <string name="quality_mesh">Mesh P2P</string>
+    <string name="switch_to_mesh">Switch to Mesh</string>
+    <string name="switch_to_direct">Switch to Direct</string>
+    
+    <!-- States -->
+    <string name="buffering">Buffering...</string>
+    <string name="connecting">Connecting...</string>
+    <string name="error">Error</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">Save</string>
+    <string name="done">Done</string>
+    
+    <!-- Messages -->
+    <string name="error_loading_movies">Error loading movies</string>
+    <string name="no_movies">No movies available</string>
+    <string name="no_results">No results found</string>
+    <string name="empty_list">Your list is empty</string>
+    <string name="network_error">Network error. Please check your connection.</string>
+    <string name="coming_soon">Coming Soon</string>
+    
+    <!-- Mesh Network -->
     <string name="mesh_connected">Mesh Connected</string>
     <string name="mesh_disconnected">Mesh Disconnected</string>
     <string name="peers_connected">Peers: %d</string>
     <string name="start_mesh">Start Mesh</string>
     <string name="stop_mesh">Stop Mesh</string>
     <string name="start_sharing">Start Sharing</string>
-    <string name="refresh">Refresh</string>
     <string name="connected_peers">Connected Peers</string>
     <string name="mesh_stats">Mesh Statistics</string>
-    <string name="back">Back</string>
-    <string name="quality">Quality</string>
-    <string name="switch_to_mesh">Switch to Mesh</string>
-    <string name="switch_to_direct">Switch to Direct</string>
+    <string name="mesh_network">Mesh Network</string>
+    <string name="mesh_active">Active</string>
+    <string name="mesh_inactive">Inactive</string>
+    <string name="mesh_not_active">Mesh Network Not Active</string>
+    <string name="mesh_not_active_message">Start the mesh network to share and stream movies with nearby peers.</string>
+    <string name="stop_mesh_network">Stop Mesh Network?</string>
+    <string name="stop_mesh_network_message">This will disconnect from all peers and stop sharing movies.</string>
+    <string name="mesh_network_info">Mesh Network Info</string>
+    <string name="total_peers">Total Peers</string>
+    <string name="active_peers">Active Peers</string>
+    <string name="data_shared">Data Shared</string>
+    <string name="data_received">Data Received</string>
+    <string name="average_latency">Average Latency</string>
+    <string name="uptime">Uptime</string>
+    <string name="connection_quality">Connection Quality</string>
+    <string name="excellent">Excellent</string>
+    <string name="good">Good</string>
+    <string name="fair">Fair</string>
+    <string name="poor">Poor</string>
+    <string name="unknown">Unknown</string>
+    <string name="peers">Peers</string>
+    <string name="transfers">Transfers</string>
+    <string name="statistics">Statistics</string>
+    <string name="no_peers">No Peers Found</string>
+    <string name="no_peers_message">No nearby devices detected. Make sure others have mesh enabled.</string>
+    <string name="no_transfers">No Active Transfers</string>
+    <string name="no_transfers_message">Start streaming to see mesh transfer activity.</string>
+    
+    <!-- Search -->
+    <string name="search_hint">Search movies, shows...</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="popular_searches">Popular Searches</string>
+    <string name="clear_search">Clear search</string>
+    <string name="filters">Filters</string>
+    <string name="genre">Genre</string>
+    <string name="year">Year</string>
+    <string name="rating">Rating</string>
+    <string name="clear_filters">Clear Filters</string>
+    
+    <!-- Profile -->
+    <string name="edit_profile">Edit Profile</string>
+    <string name="change_password">Change Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="account">Account</string>
+    <string name="movie_quality">Movie Quality</string>
+    <string name="data_usage">Data Usage</string>
+    <string name="about">About</string>
+    <string name="version">Version</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    
+    <!-- Movie Info -->
+    <string name="duration">Duration</string>
+    <string name="release_year">Release Year</string>
+    <string name="description">Description</string>
+    <string name="cast">Cast</string>
+    <string name="director">Director</string>
+    <string name="genres">Genres</string>
+    
+    <!-- Stats -->
+    <string name="movies">Movies</string>
+    <string name="total_duration">Total Duration</string>
+    <string name="streamed">Streamed</string>
+    <string name="reset_statistics">Reset Statistics</string>
+    
+    <!-- Time Formats -->
+    <string name="hours_short">h</string>
+    <string name="minutes_short">m</string>
+    <string name="seconds_short">s</string>
+    
+    <!-- Actions -->
+    <string name="refresh">Refresh</string>
+    <string name="sort">Sort</string>
+    <string name="filter">Filter</string>
+    <string name="download">Download</string>
+    <string name="delete">Delete</string>
+    <string name="remove">Remove</string>
+    <string name="edit">Edit</string>
+    <string name="info">Info</string>
+    <string name="retry">Retry</string>
+    <string name="go_back">Go Back</string>
+    <string name="get_started">Get Started</string>
+    <string name="browse_movies">Browse Movies</string>
+    <string name="try_again">Try Again</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="status">Status</string>
+    <string name="sort_by">Sort By</string>
+    
+    <!-- Featured Content -->
+    <string name="featured">Featured</string>
+    <string name="trending_now">Trending Now</string>
+    <string name="new_releases">New Releases</string>
+    <string name="continue_watching">Continue Watching</string>
+    <string name="recommended">Recommended for You</string>
+    
+    <!-- Accessibility -->
+    <string name="content_description_thumbnail">Movie thumbnail</string>
+    <string name="content_description_play">Play movie</string>
+    <string name="content_description_profile">Profile picture</string>
+    <string name="content_description_menu">Menu</string>
+
+    <!-- Error States -->
+    <string name="error_title">Oops!</string>
+    <string name="error_message">Something went wrong</string>
+    <string name="error_generic_title">Error</string>
+    <string name="error_no_internet_title">No Internet Connection</string>
+    <string name="error_no_internet_message">Please check your internet connection and try again.</string>
+    <string name="error_server_title">Server Error</string>
+    <string name="error_server_message">We\'re having trouble connecting to our servers. Please try again later.</string>
+    <string name="error_timeout_title">Request Timeout</string>
+    <string name="error_timeout_message">The request took too long. Please check your connection and try again.</string>
+    <string name="error_not_found_title">Not Found</string>
+    <string name="error_not_found_message">The content you\'re looking for doesn\'t exist.</string>
+    <string name="error_unauthorized_title">Unauthorized</string>
+    <string name="error_unauthorized_message">Please log in to continue.</string>
+    <string name="error_auth">Authentication failed</string>
+    <string name="error_permission_title">Access Denied</string>
+    <string name="error_permission_message">You don\'t have permission to access this content.</string>
+
+    <!-- Empty States -->
+    <string name="empty_title">Nothing here</string>
+    <string name="empty_message">Start exploring to see content here</string>
+    <string name="empty_no_movies_title">No movies available</string>
+    <string name="empty_no_movies_message">Check back later for new content</string>
+    <string name="empty_list_title">Your list is empty</string>
+    <string name="empty_list_message">Add movies to your list to watch them later</string>
+    <string name="empty_search_title">No results found</string>
+    <string name="empty_search_message">We couldn\'t find anything for \"%s\"</string>
+    <string name="empty_mesh_title">No peers connected</string>
+    <string name="empty_mesh_message">Start mesh to connect with other users</string>
+    <string name="empty_downloads_title">No Downloads Yet</string>
+    <string name="empty_downloads_message">Download movies to watch offline anytime, anywhere.</string>
+
+    <!-- Loading States -->
+    <string name="loading">Loading...</string>
+    <string name="loading_movies">Loading movies...</string>
+    <string name="loading_content">Loading content...</string>
+    <string name="please_wait">Please wait...</string>
+
+    <!-- Downloads -->
+    <string name="downloads">Downloads</string>
+    <string name="download_quality">Download Quality</string>
+    <string name="download_started">Download started</string>
+    <string name="already_downloaded">Already downloaded</string>
+    <string name="insufficient_storage">Insufficient Storage</string>
+    <string name="insufficient_storage_message">Not enough space to download this movie. Please free up some space and try again.</string>
+    <string name="cancel_download">Cancel Download</string>
+    <string name="cancel_download_message">Are you sure you want to cancel downloading "%s"?</string>
+    <string name="delete_download">Delete Download</string>
+    <string name="delete_download_message">Are you sure you want to delete "%s"?</string>
+    <string name="delete_all_downloads">Delete All Downloads</string>
+    <string name="delete_all_downloads_message">Are you sure you want to delete all %d downloads?</string>
+    <string name="storage_used">%s used</string>
+    <string name="storage_available">%s available</string>
+    <string name="expires_in">Expires in %dh</string>
+    <string name="expired">Expired</string>
 </resources>

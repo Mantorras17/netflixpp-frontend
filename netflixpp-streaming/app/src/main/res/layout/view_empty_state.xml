@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <!-- Empty State Icon -->
+    <ImageView
+        android:id="@+id/ivEmpty"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
+        android:src="@drawable/ic_empty_box"
+        app:tint="@color/netflix_text_gray"
+        android:alpha="0.5"
+        android:layout_marginBottom="24dp"
+        android:contentDescription="Empty state icon" />
+
+    <!-- Empty State Title -->
+    <TextView
+        android:id="@+id/tvEmptyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_title"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginBottom="12dp"
+        tools:text="Nothing here yet" />
+
+    <!-- Empty State Message -->
+    <TextView
+        android:id="@+id/tvEmptyMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/empty_message"
+        android:textColor="@color/netflix_text_gray"
+        android:textSize="14sp"
+        android:textAlignment="center"
+        android:layout_marginBottom="24dp"
+        android:lineSpacingExtra="4dp"
+        tools:text="Start adding items to see them here." />
+
+    <!-- Action Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAction"
+        android:layout_width="wrap_content"
+        android:layout_height="56dp"
+        android:text="@string/get_started"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:paddingHorizontal="48dp"
+        app:backgroundTint="@color/netflix_red"
+        app:cornerRadius="8dp" />
+
+</LinearLayout>

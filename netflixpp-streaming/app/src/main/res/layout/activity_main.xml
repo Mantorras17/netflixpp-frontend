@@ -1,41 +1,258 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/netflix_dark"
-    android:orientation="vertical">
+    android:background="@color/netflix_dark">
 
+    <!-- Refresh Layout -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tvWelcome"
+                <!-- Hero Section with Featured Movie -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/heroSection"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Welcome, User"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:padding="16dp" />
+                    android:layout_height="600dp">
 
+                    <!-- Hero Background Image -->
+                    <ImageView
+                        android:id="@+id/ivHeroBackground"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/bg_movie_placeholder"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Hero Gradient Overlay -->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/gradient_hero_overlay"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                    <!-- Top Bar -->
+                    <LinearLayout
+                        android:id="@+id/topBar"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="NETFLIX++"
+                            android:textColor="@color/netflix_red"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-black" />
+
+                        <ImageButton
+                            android:id="@+id/btnSearch"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:src="@drawable/ic_search"
+                            android:background="?attr/selectableItemBackgroundBorderless"
+                            app:tint="@color/white"
+                            android:contentDescription="@string/search" />
+
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_profile_default"
+                            android:padding="8dp"
+                            android:layout_marginStart="8dp"
+                            app:tint="@color/white"
+                            android:contentDescription="@string/profile" />
+
+                    </LinearLayout>
+
+                    <!-- Hero Content -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <!-- Featured Badge -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/featured"
+                            android:textColor="@color/netflix_red"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:letterSpacing="0.1"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Hero Title -->
+                        <TextView
+                            android:id="@+id/tvHeroTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Featured Movie"
+                            android:textColor="@color/white"
+                            android:textSize="36sp"
+                            android:textStyle="bold"
+                            android:fontFamily="sans-serif-black"
+                            android:shadowColor="@android:color/black"
+                            android:shadowDx="2"
+                            android:shadowDy="2"
+                            android:shadowRadius="4"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            tools:text="Night of the Living Dead" />
+
+                        <!-- Hero Info -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center_vertical">
+
+                            <ImageView
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
+                                android:src="@drawable/ic_star"
+                                app:tint="@color/rating_gold"
+                                android:layout_marginEnd="6dp" />
+
+                            <TextView
+                                android:id="@+id/tvHeroRating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.5"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                android:layout_marginEnd="16dp"
+                                tools:text="4.2" />
+
+                            <TextView
+                                android:id="@+id/tvHeroYear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2023"
+                                android:textColor="@color/netflix_text_gray"
+                                android:textSize="14sp"
+                                android:layout_marginEnd="8dp"
+                                tools:text="1968" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="•"
+                                android:textColor="@color/netflix_text_gray"
+                                android:layout_marginHorizontal="8dp" />
+
+                            <TextView
+                                android:id="@+id/tvHeroGenre"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Horror"
+                                android:textColor="@color/netflix_text_gray"
+                                android:textSize="14sp"
+                                tools:text="Horror" />
+
+                        </LinearLayout>
+
+                        <!-- Hero Description -->
+                        <TextView
+                            android:id="@+id/tvHeroDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Description"
+                            android:textColor="@color/netflix_text_gray"
+                            android:textSize="14sp"
+                            android:layout_marginTop="12dp"
+                            android:maxLines="3"
+                            android:ellipsize="end"
+                            android:lineSpacingExtra="2dp"
+                            tools:text="A thrilling adventure that will keep you on the edge of your seat." />
+
+                        <!-- Hero Actions -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="20dp">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnHeroPlay"
+                                android:layout_width="0dp"
+                                android:layout_height="56dp"
+                                android:layout_weight="1"
+                                android:text="@string/play"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:icon="@drawable/ic_play"
+                                app:iconTint="@color/black"
+                                app:backgroundTint="@color/white"
+                                app:cornerRadius="8dp"
+                                android:layout_marginEnd="12dp" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnHeroInfo"
+                                android:layout_width="56dp"
+                                android:layout_height="56dp"
+                                app:icon="@drawable/ic_info"
+                                app:iconTint="@color/white"
+                                app:iconGravity="textStart"
+                                app:iconPadding="0dp"
+                                app:backgroundTint="@color/netflix_light_gray"
+                                app:cornerRadius="8dp"
+                                android:contentDescription="@string/more_info" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Categories Section -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvCategories"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp" />
+                    android:clipToPadding="false"
+                    android:paddingTop="16dp"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_category" />
 
             </LinearLayout>
 
@@ -43,20 +260,52 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <!-- Error State View -->
+    <com.netflixpp_streaming.view.ErrorStateView
+        android:id="@+id/errorStateView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Empty State View -->
+    <com.netflixpp_streaming.view.EmptyStateView
+        android:id="@+id/emptyStateView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Loading View -->
+    <com.netflixpp_streaming.view.LoadingView
+        android:id="@+id/loadingView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/navigationBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigationBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/netflix_dark_gray"
+        android:background="@color/bottom_nav_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_navigation"
-        app:itemIconTint="@color/bottom_nav_color"
-        app:itemTextColor="@color/bottom_nav_color" />
+        app:itemIconTint="@drawable/bottom_nav_selector"
+        app:itemTextColor="@drawable/bottom_nav_selector"
+        app:labelVisibilityMode="labeled"
+        app:elevation="8dp" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,11 +4,11 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="welcome">Welcome</string>
-    <string name="upload_video">Upload Video</string>
-    <string name="manage_videos">Manage Videos</string>
+    <string name="upload_movie">Upload Movie</string>
+    <string name="manage_movies">Manage Movies</string>
     <string name="manage_users">Manage Users</string>
     <string name="logout">Logout</string>
-    <string name="select_video">Select Video</string>
+    <string name="select_movies">Select Movies</string>
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="genre">Genre</string>

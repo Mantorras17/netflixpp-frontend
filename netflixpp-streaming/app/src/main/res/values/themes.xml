@@ -1,31 +1,64 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.NetflixPPStreaming" parent="Theme.Material3.Dark">
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Application Theme -->
+    <style name="Base.Theme.NetflixPPStreaming" parent="Theme.Material3.Dark.NoActionBar">
+        <!-- Primary Brand Colors -->
         <item name="colorPrimary">@color/netflix_red</item>
-        <item name="colorPrimaryVariant">@color/netflix_red</item>
+        <item name="colorPrimaryVariant">@color/netflix_red_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/netflix_red</item>
-        <item name="colorSecondaryVariant">@color/netflix_red</item>
+        
+        <!-- Secondary Brand Colors -->
+        <item name="colorSecondary">@color/netflix_dark_gray</item>
+        <item name="colorSecondaryVariant">@color/netflix_light_gray</item>
         <item name="colorOnSecondary">@color/white</item>
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        
+        <!-- Background Colors -->
+        <item name="android:colorBackground">@color/netflix_dark</item>
+        <item name="colorSurface">@color/netflix_dark_gray</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/netflix_dark</item>
         <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Navigation Bar -->
         <item name="android:navigationBarColor">@color/netflix_dark</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Other Attributes -->
+        <item name="colorError">@color/error_red</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Text Appearances -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorSecondary">@color/netflix_text_gray</item>
+        
+        <!-- Window Attributes -->
+        <item name="android:windowBackground">@color/netflix_dark</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+
+        <!-- Enable Activity Transitions -->
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_element_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/shared_element_transition</item>
     </style>
 
     <style name="Theme.NetflixPPStreaming" parent="Base.Theme.NetflixPPStreaming" />
 
     <!-- Splash Screen Theme -->
-    <style name="Theme.NetflixPPStreaming.Splash" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
-        <item name="android:statusBarColor">@color/netflix_dark</item>
-        <item name="android:navigationBarColor">@color/netflix_dark</item>
+    <style name="Theme.NetflixPPStreaming.Splash" parent="Theme.NetflixPPStreaming">
+        <item name="android:windowBackground">@color/netflix_dark</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
-    <!-- Full Screen Theme for Video Player -->
-    <style name="Theme.NetflixPPStreaming.FullScreen" parent="Theme.NetflixPPStreaming">
+    <!-- Full Screen Theme (Movie Player) -->
+    <style name="Theme.NetflixPPStreaming.Fullscreen" parent="Theme.NetflixPPStreaming">
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 </resources>
