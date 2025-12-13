@@ -9,7 +9,8 @@ import java.util.concurrent.TimeUnit
 
 object ApiClient {
     // Update with your server IP - use 10.0.2.2 for Android emulator to connect to localhost
-    private const val BASE_URL = "http://10.0.2.2:8080/api/"
+    // This is Hugo's local IP path
+    private const val BASE_URL = "http://10.149.118.98:8080/api/"
 
     private var retrofit: Retrofit? = null
 
@@ -29,7 +30,7 @@ object ApiClient {
 
         val client = OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
-            .addInterceptor(authInterceptor) // Adicionar interceptor de auth
+            .addInterceptor(authInterceptor)
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .writeTimeout(30, TimeUnit.SECONDS)

@@ -30,7 +30,6 @@ class LoginActivity : AppCompatActivity() {
         }
 
         setupClickListeners()
-        setupTestCredentials() // Para testes - remover em produção
     }
 
     private fun setupClickListeners() {

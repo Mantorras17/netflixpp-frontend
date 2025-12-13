@@ -33,15 +33,15 @@ data class SystemStats(
 )
 
 data class StorageInfo(
-    @SerializedName("totalSpace") val totalSpace: Long,
-    @SerializedName("usedSpace") val usedSpace: Long,
-    @SerializedName("freeSpace") val freeSpace: Long,
-    @SerializedName("movieCount") val movieCount: Int,
-    @SerializedName("chunkCount") val chunkCount: Int?
+    @SerializedName("moviesCount") val moviesCount: Long,
+    @SerializedName("moviesSize") val moviesSize: Long,
+    @SerializedName("chunksCount") val chunksCount: Long,
+    @SerializedName("chunksSize") val chunksSize: Long,
+    @SerializedName("totalSize") val totalSize: Long
 )
 
 data class LogsResponse(
-    @SerializedName("logs") val logs: List<LogEntry>,
+    @SerializedName("entries") val logs: List<LogEntry>,
     @SerializedName("type") val type: String,
     @SerializedName("count") val count: Int
 )

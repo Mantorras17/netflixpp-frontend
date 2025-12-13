@@ -67,12 +67,17 @@ class EditUserActivity : AppCompatActivity() {
     }
 
     private fun populateFields(user: User) {
-        binding.tvUsername.text = "Username: ${user.username}"
-        binding.etEmail.setText(user.email)
-        
-        val roleAdapter = binding.spRole.adapter as ArrayAdapter<String>
-        val rolePosition = roleAdapter.getPosition(user.role.lowercase())
-        if (rolePosition >= 0) binding.spRole.setSelection(rolePosition)
+        binding.root.post {
+            binding.tvUsername.text = "User ID: ${user.id}"
+            binding.etUsername.setText(user.username)
+            binding.etEmail.setText(user.email)
+            binding.etPassword.setText("")
+            
+            
+            val roleAdapter = binding.spRole.adapter as ArrayAdapter<String>
+            val rolePosition = roleAdapter.getPosition(user.role.lowercase())
+            if (rolePosition >= 0) binding.spRole.setSelection(rolePosition)
+        }
     }
 
     private fun setupClickListeners() {
@@ -96,6 +101,10 @@ class EditUserActivity : AppCompatActivity() {
             Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show()
             return false
         }
+        if (binding.etEmail.text.toString().trim().isEmpty()) {
+            Toast.makeText(this, "Please enter email", Toast.LENGTH_SHORT).show()
+            return false
+        }
         return true
     }
 
@@ -104,11 +113,17 @@ class EditUserActivity : AppCompatActivity() {
         binding.btnSave.isEnabled = false
 
         val updates = mutableMapOf<String, Any>()
+        updates["username"] = binding.etUsername.text.toString()
         updates["email"] = binding.etEmail.text.toString()
         updates["role"] = binding.spRole.selectedItem.toString()
 
-        ApiClient.getApiService(this).updateUser(userId, updates).enqueue(object : Callback<ApiResponse<String>> {
-            override fun onResponse(call: Call<ApiResponse<String>>, response: Response<ApiResponse<String>>) {
+        val password = binding.etPassword.text.toString().trim()
+        if (password.isNotEmpty()) {
+            updates["password"] = password
+        }
+
+        ApiClient.getApiService(this).updateUser(userId, updates).enqueue(object : Callback<Map<String, @JvmSuppressWildcards Any>> {
+            override fun onResponse(call: Call<Map<String, @JvmSuppressWildcards Any>>, response: Response<Map<String, @JvmSuppressWildcards Any>>) {
                 binding.progressBar.visibility = android.view.View.GONE
                 binding.btnSave.isEnabled = true
 
@@ -121,7 +136,7 @@ class EditUserActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ApiResponse<String>>, t: Throwable) {
+            override fun onFailure(call: Call<Map<String, @JvmSuppressWildcards Any>>, t: Throwable) {
                 binding.progressBar.visibility = android.view.View.GONE
                 binding.btnSave.isEnabled = true
                 Toast.makeText(this@EditUserActivity, "Network error: ${t.message}", Toast.LENGTH_SHORT).show()

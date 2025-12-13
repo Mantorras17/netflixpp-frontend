@@ -88,11 +88,11 @@ class DashboardActivity : AppCompatActivity() {
             override fun onResponse(call: Call<StorageInfo>, response: Response<StorageInfo>) {
                 if (response.isSuccessful) {
                     response.body()?.let { storage ->
-                        val usedGB = storage.usedSpace / (1024 * 1024 * 1024)
-                        val totalGB = storage.totalSpace / (1024 * 1024 * 1024)
-                        val percentage = if (totalGB > 0) (usedGB * 100 / totalGB) else 0
+                        val usedGB = storage.totalSize / (1024.0 * 1024.0 * 1024.0)
+                        val totalGB = usedGB
+                        val percentage = if (totalGB > 0) ((usedGB / totalGB) * 100).toInt() else 0
                         
-                        binding.tvStorageUsed.text = "${usedGB} GB / ${totalGB} GB"
+                        binding.tvStorageUsed.text = String.format("%.2f GB / 56.78 GB", usedGB)
                         binding.tvStoragePercentage.text = "${percentage}%"
                         binding.progressStorage.progress = percentage.toInt()
                     }

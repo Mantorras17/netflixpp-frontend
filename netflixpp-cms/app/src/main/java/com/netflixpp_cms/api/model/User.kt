@@ -7,5 +7,8 @@ data class User(
     @SerializedName("username") val username: String,
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String? = null,
-    @SerializedName("role") val role: String = "user"
+    @SerializedName("role") val role: String = "user",
+    @SerializedName("createdAt") val createdAt: String? = null,
+    @SerializedName("totalViews") val totalViews: Int? = null,
+    @SerializedName("lastWatched") val lastWatched: String? = null
 )

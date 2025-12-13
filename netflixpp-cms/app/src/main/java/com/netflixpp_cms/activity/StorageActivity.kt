@@ -68,19 +68,19 @@ class StorageActivity : AppCompatActivity() {
     }
 
     private fun displayStorageInfo(storage: StorageInfo) {
-        val totalGB = storage.totalSpace / (1024.0 * 1024.0 * 1024.0)
-        val usedGB = storage.usedSpace / (1024.0 * 1024.0 * 1024.0)
-        val freeGB = storage.freeSpace / (1024.0 * 1024.0 * 1024.0)
-        val usagePercentage = if (totalGB > 0) ((usedGB / totalGB) * 100).toInt() else 0
+        val moviesGB = storage.moviesSize / (1024.0 * 1024.0 * 1024.0)
+        val chunksGB = storage.chunksSize / (1024.0 * 1024.0 * 1024.0)
+        val totalGB = storage.totalSize / (1024.0 * 1024.0 * 1024.0)
+        val usagePercentage = if (totalGB > 0) ((storage.totalSize.toDouble() / storage.totalSize.toDouble()) * 100).toInt() else 0
 
         binding.tvTotalSpace.text = String.format("Total: %.2f GB", totalGB)
-        binding.tvUsedSpace.text = String.format("Used: %.2f GB", usedGB)
-        binding.tvFreeSpace.text = String.format("Free: %.2f GB", freeGB)
+        binding.tvUsedSpace.text = String.format("Movies: %.2f GB | Chunks: %.2f GB", moviesGB, chunksGB)
+        binding.tvFreeSpace.text = "Free: 56.78 GB" // Placeholder
         binding.tvUsagePercentage.text = "$usagePercentage%"
         binding.progressStorage.progress = usagePercentage
 
-        binding.tvMovieCount.text = "Movies: ${storage.movieCount}"
-        binding.tvChunkCount.text = "Chunks: ${storage.chunkCount ?: 0}"
+        binding.tvMovieCount.text = "Movies: ${storage.moviesCount}"
+        binding.tvChunkCount.text = "Chunks: ${storage.chunksCount}"
 
         // Set progress bar color based on usage
         val color = when {

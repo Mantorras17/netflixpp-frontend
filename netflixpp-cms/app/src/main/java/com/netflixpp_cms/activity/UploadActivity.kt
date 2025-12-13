@@ -62,7 +62,7 @@ class UploadActivity : AppCompatActivity() {
     private fun setupClickListeners() {
         binding.btnSelectMovie.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                type = "movie/*"
+                type = "video/*"
             }
             moviePickerLauncher.launch(intent)
         }
@@ -113,7 +113,7 @@ class UploadActivity : AppCompatActivity() {
                 showError("Failed to read movie file")
                 return
             }
-            val requestFile = tempFile.asRequestBody("movie/*".toMediaTypeOrNull())
+            val requestFile = tempFile.asRequestBody("video/*".toMediaTypeOrNull())
             val filePart = MultipartBody.Part.createFormData("file", tempFile.name, requestFile)
 
             val title = binding.etTitle.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
@@ -131,8 +131,11 @@ class UploadActivity : AppCompatActivity() {
 
                     if (response.isSuccessful && response.body()?.movieId != null) {
                         uploadedMovieId = response.body()!!.movieId
-                        binding.tvStatus.text = "Upload complete! Generating chunks..."
-                        generateChunks(uploadedMovieId!!)
+                        binding.progressBar.visibility = android.view.View.GONE
+                        binding.btnUpload.isEnabled = true
+                        binding.tvStatus.text = "Movie uploaded successfully with chunks generated!"
+                        clearForm()
+                        finish()
                     } else {
                         showError(response.body()?.message ?: "Upload failed: ${response.code()}")
                     }
@@ -149,34 +152,33 @@ class UploadActivity : AppCompatActivity() {
     }
 
     private fun generateChunks(movieId: Int) {
-        ApiClient.getApiService(this).generateChunks(movieId)
-            .enqueue(object : Callback<ChunkGenerationResponse> {
-                override fun onResponse(call: Call<ChunkGenerationResponse>, response: Response<ChunkGenerationResponse>) {
-                    binding.progressBar.visibility = android.view.View.GONE
-                    binding.btnUpload.isEnabled = true
+        ApiClient.getApiService(this).generateChunks(movieId).enqueue(object : Callback<ChunkGenerationResponse> {
+            override fun onResponse(call: Call<ChunkGenerationResponse>, response: Response<ChunkGenerationResponse>) {
+                binding.progressBar.visibility = android.view.View.GONE
+                binding.btnUpload.isEnabled = true
 
-                    if (response.isSuccessful) {
-                        val result = response.body()
-                        binding.tvStatus.text = "Movie uploaded successfully with chunks generated!"
-                        Toast.makeText(
-                            this@UploadActivity,
-                            "Chunks generated: ${result?.chunksGenerated ?: 0}",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        clearForm()
-                        finish()
-                    } else {
-                        binding.tvStatus.text = "Movie uploaded but chunk generation failed"
-                        Toast.makeText(this@UploadActivity, "Chunk generation failed", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ChunkGenerationResponse>, t: Throwable) {
-                    binding.progressBar.visibility = android.view.View.GONE
-                    binding.btnUpload.isEnabled = true
+                if (response.isSuccessful) {
+                    val result = response.body()
+                    binding.tvStatus.text = "Movie uploaded successfully with chunks generated!"
+                    Toast.makeText(
+                        this@UploadActivity,
+                        "Chunks generated: ${result?.chunksGenerated ?: 0}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    clearForm()
+                    finish()
+                } else {
                     binding.tvStatus.text = "Movie uploaded but chunk generation failed"
+                    Toast.makeText(this@UploadActivity, "Chunk generation failed", Toast.LENGTH_SHORT).show()
                 }
-            })
+            }
+
+            override fun onFailure(call: Call<ChunkGenerationResponse>, t: Throwable) {
+                binding.progressBar.visibility = android.view.View.GONE
+                binding.btnUpload.isEnabled = true
+                binding.tvStatus.text = "Movie uploaded but chunk generation failed"
+            }
+        })
     }
 
     private fun createTempFileFromUri(uri: Uri): File? {

@@ -95,13 +95,13 @@ class MovieDetailActivity : AppCompatActivity() {
     }
 
     private fun loadChunksInfo() {
-        ApiClient.getApiService(this).getChunksInfo(movieId.toString()).enqueue(object : Callback<ChunksInfo> {
+        ApiClient.getApiService(this).getChunksInfo("movie_$movieId").enqueue(object : Callback<ChunksInfo> {
             override fun onResponse(call: Call<ChunksInfo>, response: Response<ChunksInfo>) {
                 if (response.isSuccessful) {
                     response.body()?.let { info ->
                         binding.tvChunkInfo.text = """
                             Chunks Generated: ${info.totalChunks}
-                            Chunk Size: ${info.chunkSize / 1024} KB
+                            Chunk Size: ${formatFileSize(info.chunkSize)}
                             Quality: ${info.quality}
                         """.trimIndent()
                     }
@@ -167,5 +167,16 @@ class MovieDetailActivity : AppCompatActivity() {
 
     companion object {
         private const val REQUEST_EDIT = 100
+    }
+
+    private fun formatFileSize(bytes: Long): String {
+        return when {
+            bytes >= 1024 * 1024 -> {
+                val mb = bytes / (1024.0 * 1024.0)
+                if (mb >= 10) "10 MB" else "%.2f MB".format(mb)
+            }
+            bytes >= 1024 -> "%.2f KB".format(bytes / 1024.0)
+            else -> "$bytes bytes"
+        }
     }
 }

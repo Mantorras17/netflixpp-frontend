@@ -2,6 +2,7 @@ package com.netflixpp_cms.api
 
 import com.netflixpp_cms.model.*
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
@@ -37,9 +38,6 @@ interface ApiService {
         @Query("limit") limit: Int = 20,
         @Query("sort") sort: String = "newest"
     ): Call<MoviesResponse>
-
-    @GET("movies/{id}")
-    fun getMovie(@Path("id") id: Int): Call<Movie>
 
     @GET("movies/search")
     fun searchMovies(@Query("q") query: String): Call<List<Movie>>
@@ -78,6 +76,9 @@ interface ApiService {
         @Part file: MultipartBody.Part
     ): Call<MovieUploadResponse>
 
+    @GET("admin/movies/{id}")
+    fun getMovie(@Path("id") id: Int): Call<Movie>
+
     @PUT("admin/movies/{id}")
     fun updateMovie(
         @Path("id") id: Int,
@@ -106,8 +107,8 @@ interface ApiService {
     @PUT("admin/users/{id}")
     fun updateUser(
         @Path("id") id: Int,
-        @Body updates: Map<String, Any>
-    ): Call<ApiResponse<String>>
+        @Body updates: Map<String, @JvmSuppressWildcards Any>
+    ): Call<Map<String, @JvmSuppressWildcards Any>>
 
     @DELETE("admin/users/{id}")
     fun deleteUser(@Path("id") id: Int): Call<ApiResponse<String>>
@@ -137,6 +138,13 @@ interface ApiService {
     // ============ STREAMING INFO (for monitoring) ============
     @GET("stream/chunks/{movieId}")
     fun getChunksInfo(@Path("movieId") movieId: String): Call<ChunksInfo>
+
+    @GET("stream/chunk/{movieId}/{chunkIndex}")
+    @Streaming
+    fun getChunk(
+        @Path("movieId") movieId: String,
+        @Path("chunkIndex") chunkIndex: Int
+    ): Call<ResponseBody>
 
     @GET("stream/manifest/{movieId}")
     fun getStreamManifest(@Path("movieId") movieId: String): Call<StreamManifest>
